@@ -1,0 +1,33 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+
+<html>
+<head>
+    <title>Login Form</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <h2>Create New Project</h2><br>
+    <div class="New Project">
+    <form>
+        <label><b>Project Name
+        </b> <br><br>
+        </label>
+        <input type="text" >
+        <br><br>
+        <label><b>Stored Location
+        </b>
+        <br><br>
+        </label>
+        <input type="text">
+        <input type="button" value="Browse">
+    </form>
+</div>
+</body>
+</html>
+
+
+<script src="{{url_for('static', filename='main.js')}}"></script>
+
+{% endblock content %}
