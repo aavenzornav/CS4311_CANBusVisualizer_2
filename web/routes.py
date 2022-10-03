@@ -7,10 +7,10 @@ from web import app
 def homepage():
     return render_template('base.html', title='Home')
 
-@app.route('/create-project')
+@app.route('/manage-project')
 
 def create_project():
-    return render_template('create-project.html', title='Create Project')
+    return render_template('manage-project.html', title='Create Project')
 
 @app.route('/open-project')
 
