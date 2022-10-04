@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash
 from web import app
+from .forms import TodoForms
 
 @app.route('/')
 @app.route('/base')
@@ -7,9 +8,12 @@ from web import app
 def homepage():
     return render_template('base.html', title='Home')
 
-@app.route('/manage-project')
+@app.route('/manage-project', methods = ["POST", "GET"])
 
+#create project will be stored in mongo db
 def create_project():
+    #if request.method == "POST":
+        #manage = manage-project
     return render_template('manage-project.html', title='Create Project')
 
 @app.route('/open-project')

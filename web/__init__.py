@@ -1,14 +1,22 @@
 from flask import Flask
-from pymongo import MongoClient
+from flask_pymongo import PyMongo
+
+
 
 app = Flask(__name__)
-
 from web import routes
 
-client = MongoClient('localhost', 1337)
+#Secret key
+app.config["SECRET_KEY"] = '72109ede3972aab8'
 
-db = client.flask_db
-todos = db.todos
+#database for the admin to access
+app.config["MONGO_URI"] = 'Devcom_Client:admin@sw2projectlist.pficegj.mongodb.net/?retryWrites=true&w=majority'
+
+#Set up Mongo db
+mongodb_client = PyMongo(app)
+db = mongodb_client.db
+
+
 
 
 
