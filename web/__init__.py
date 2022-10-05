@@ -10,7 +10,7 @@ from web import routes
 app.config["SECRET_KEY"] = '72109ede3972aab8'
 
 #database for the admin to access
-app.config["MONGO_URI"] = 'Devcom_Client:admin@sw2projectlist.pficegj.mongodb.net/?retryWrites=true&w=majority'
+app.config["MONGO_URI"] = 'mongodb+srv://Devcom_Client:admin@sw2projectlist.pficegj.mongodb.net/?retryWrites=true&w=majority'
 
 #Set up Mongo db
 mongodb_client = PyMongo(app)

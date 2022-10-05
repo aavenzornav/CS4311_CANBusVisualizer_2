@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash
 from web import app
-from .forms import TodoForms
+from .forms import create_project_form
 
 @app.route('/')
 @app.route('/base')
@@ -14,7 +14,8 @@ def homepage():
 def create_project():
     #if request.method == "POST":
         #manage = manage-project
-    return render_template('manage-project.html', title='Create Project')
+    form = create_project_form()
+    return render_template('manage-project.html', title='Create Project', form=form)
 
 @app.route('/open-project')
 
