@@ -13,7 +13,7 @@ app.config["MONGO_URI"] = "mongodb+srv://admin:admin@cluster0.udzlyml.mongodb.ne
 
 #Set up Mongo db
 mongodb_client = PyMongo(app)
-#db = mongodb_client.db
+db = mongodb_client.db
 from web import routes
 
 

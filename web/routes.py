@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash
 from web import app 
-from . import mongodb_client
+from . import db
 from .forms import create_project_form
 from datetime import datetime
 from werkzeug.utils import redirect
@@ -13,8 +13,9 @@ def homepage():
 #create project will be stored in mongo db
 @app.route('/manage-project', methods = ("POST", "GET"))
 def manage_project():
-    form = create_project_form()
-    if form.validate_on_submit():
+   
+    if request.method == "POST":
+        form = create_project_form(request.form)
         todo_user_initials = form.user_initials.data
         todo_event_name = form.event_name.data
         todo_can_connector_id = form.can_connector_id.data
@@ -23,7 +24,7 @@ def manage_project():
         todo_can_dbc = form.can_dbc.data
 
 
-        mongodb_client.project.insert({
+        db.project.insert_one({
             "user_initials": todo_user_initials,
             "event_name": todo_event_name,
             "can_connector_id": todo_can_connector_id,
