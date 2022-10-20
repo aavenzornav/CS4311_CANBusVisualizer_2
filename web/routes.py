@@ -10,6 +10,24 @@ from werkzeug.utils import redirect
 def homepage():
     return render_template('base.html', title='Home')
 
+@app.route('/open-project')
+def open_project():
+    #same as node-map1 method;
+    #this will make it possible to retrieve ALL the collections in the project db
+    todos = []
+    for todo in db.project.find().sort("user_initials", -1):
+        todo["_id"] = str(todo["_id"])
+        todos.append(todo)
+    #info = db.project.find()
+    return render_template('open-project.html', title='Open Existing Project', todos = todos)
+@app.route('/node-map1')
+def node_map1():
+    todos = []
+    todo = db.project.find_one({"event_name":  "Proj1"})
+    # info = db.project.find()
+    todos.append(todo)
+    return render_template('node-map1.html', title='Open Existing Project', todos=todos)
+
 #create project will be stored in mongo db
 @app.route('/manage-project', methods = ("POST", "GET"))
 def manage_project():
@@ -33,16 +51,12 @@ def manage_project():
             "can_dbc": todo_can_dbc
         })
         flash("user initials", "event name")
-        return redirect("/")
+        return redirect('/')
     else:
         form = create_project_form()
     #print(db.project.find_one())
     return render_template('manage-project.html', title='Create Project', form=form)
 
-@app.route('/open-project')
-
-def open_project():
-    return render_template('open-project.html', title='Open Existing Project')
 
 @app.route('/sync-project')
 
@@ -59,9 +73,8 @@ def archive_project():
 def can_bus_manager():
     return render_template('can-bus-manager.html', title='CAN Bus Manager')
 
-@app.route('/node-map1')
-def node_map1():
-        return render_template('node-map1.html', title='Node Map')
+
+
 
 
 
