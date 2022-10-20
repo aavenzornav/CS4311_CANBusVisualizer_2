@@ -1,42 +1,38 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect,url_for
 from web import app 
 from . import mongodb_client
 from .forms import create_project_form
 from datetime import datetime
-from werkzeug.utils import redirect
-
+#from werkzeug.utils import redirect
+import sqlalchemy
 
 @app.route('/')
 def homepage():
     return render_template('base.html', title='Home')
 
 #create project will be stored in mongo db
-@app.route('/manage-project', methods = ("POST", "GET"))
+@app.route('/manage-project', methods = ["POST", "GET"])
 def manage_project():
-    form = create_project_form()
-    if form.validate_on_submit():
-        todo_user_initials = form.user_initials.data
-        todo_event_name = form.event_name.data
-        todo_can_connector_id = form.can_connector_id.data
-        todo_vehicle_id = form.vehicle_id.data
-        todo_baud_rate = form.baud_rate.data
-        todo_can_dbc = form.can_dbc.data
+    if request.method == "POST":
+        todo_user_initials = request.form["user_initials"]
+        todo_event_name = request.form["event_name"]
+        todo_can_connector_id = request.form["can_connector_id"]
+        todo_vehicle_id = request.form["vehicle_id"]
+        todo_baud_rate = request.form["baud_rate"]
+        todo_can_dbc = request.form["can_dbc"]
+        #flash("set project successful")
 
+        return redirect(url_for("user", usr = todo_user_initials))
 
-        mongodb_client.project.insert({
-            "user_initials": todo_user_initials,
-            "event_name": todo_event_name,
-            "can_connector_id": todo_can_connector_id,
-            "vehicle id": todo_vehicle_id,
-            "baud_rate": todo_baud_rate,
-            "can_dbc": todo_can_dbc
-        })
-        flash("user initials", "event name")
-        return redirect("/")
+        
     else:
-        form = create_project_form()
-    #print(db.project.find_one())
-    return render_template('manage-project.html', title='Create Project', form=form)
+        return render_template('manage-project.html')
+
+@app.route("/<usr>")
+def user(usr):
+    return f"<h1>{usr}</h1>"
+
+
 
 @app.route('/open-project')
 
