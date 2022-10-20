@@ -33,4 +33,4 @@ class create_project_form(baseSecureForm):
     baud_rate = StringField("Baud Rate", validators=[DataRequired()])
     can_dbc= StringField("CAN DBC", validators=[DataRequired()])
     validators = [DataRequired()]
-    submit = SubmitField("manage-project")
+    submit = SubmitField("Submit")
