@@ -1,0 +1,16 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+    {% for todo in todos %}
+        <div class = "card p-1 m-3">
+            <div class = card-body">
+                <h5 class = "card title">{{ todo.user_initials }}</h5>
+
+            <p class = card-text">{{todo.event_name}}</p>
+            <p class = card-text">{{todo.can_connector_id}}</p>
+
+            </div>
+        </div>
+    {%endfor%}
+
+{% endblock  %}
