@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, flash
 from web import app 
 from . import db
-from .forms import create_project_form
+from .forms import create_project_form, create_node
 from datetime import datetime
 from werkzeug.utils import redirect
+from web import Network
 
-
+node_list = []
 @app.route('/')
 def homepage():
     return render_template('base.html', title='Home')
@@ -53,7 +54,7 @@ def manage_project():
         flash("user initials", "event name")
         return redirect('/')
     else:
-        form = create_project_form()
+        form = create_project_form(request.form)
     #print(db.project.find_one())
     return render_template('manage-project.html', title='Create Project', form=form)
 
@@ -68,10 +69,20 @@ def sync_project():
 def archive_project():
     return render_template('archive-project.html', title='Archive Project')
 
-@app.route('/can-bus-manager')
-
+@app.route("/node_map/<node_list>", methods = ("POST", "GET"))
+def node_map(node_list):
+    map(node_list)
+    return render_template('Network.py', title='CAN Bus Map')
+@app.route('/can-bus-manager', methods = ("POST", "GET"))
 def can_bus_manager():
-    return render_template('can-bus-manager.html', title='CAN Bus Manager')
+    if request.method == "POST":
+        form = create_node(request.form)
+        todo_node_name = form.node_name.data
+        node_list.append(todo_node_name)
+        return redirect('node_map', node_list)
+    else:
+        form = create_node(request.form)
+    return render_template('can-bus-manager.html', title='CAN Bus Manager',form = form)
 
 
 

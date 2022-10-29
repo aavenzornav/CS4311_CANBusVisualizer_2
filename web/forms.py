@@ -34,3 +34,8 @@ class create_project_form(baseSecureForm):
     can_dbc= StringField("CAN DBC", validators=[DataRequired()])
     validators = [DataRequired()]
     submit = SubmitField("Submit")
+
+class create_node(baseSecureForm):
+    node_name = StringField("Node Name", validators=[DataRequired()])
+    validators = [DataRequired()]
+    submit = SubmitField("Submit")

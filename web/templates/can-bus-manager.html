@@ -1,9 +1,37 @@
 {% extends 'layouts.html' %}
 
 {% block content %}
-<h1>CAN Bus Manager</h1>
 
 
+
+ <div>
+        <h2>Can Map</h2><br>
+            <div class="mapper">
+                <form action = "" method = "POST">
+                    {{ form.csrf_token}}
+                    <fieldset class = "form-group">
+                        <legend> Node Map</legend>
+
+                        <div class = "form-group">
+                            {{form.node_name.label(class = "form-control-label")}}
+                            {% if form.node_name.errors %}
+                                {{form.node_name(class = "form.control is-invalid")}}
+                                {%for error in form.node_name.errors %}
+                                    <div class = "invalid-feedback">
+                                        <span>{{error}}</span>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {{form.node_name(class="form-control")}}
+                            {% endif %}
+                        </div>
+                        <div class = "form-group">
+                            {{form.submit(class="btn btn-outline-info")}}
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+    </div>
+{%include 'nodes.html'%}
 <script src="{{url_for('static', filename='main.js')}}"></script>
-
 {% endblock content %}
