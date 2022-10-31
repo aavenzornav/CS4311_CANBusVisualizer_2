@@ -6,6 +6,7 @@ from datetime import datetime
 from werkzeug.utils import redirect
 from web import Network
 
+
 node_list = []
 @app.route('/')
 def homepage():
@@ -69,9 +70,11 @@ def sync_project():
 def archive_project():
     return render_template('archive-project.html', title='Archive Project')
 
-@app.route("/node_map/<node_list>", methods = ("POST", "GET"))
-def node_map(node_list):
-    map(node_list)
+@app.route("/node_map", methods = ("POST", "GET"))
+def node_map():
+    print("enter")
+    #print(node_list)
+    #mapper(node_list)
     return render_template('Network.py', title='CAN Bus Map')
 @app.route('/can-bus-manager', methods = ("POST", "GET"))
 def can_bus_manager():
@@ -79,7 +82,9 @@ def can_bus_manager():
         form = create_node(request.form)
         todo_node_name = form.node_name.data
         node_list.append(todo_node_name)
-        return redirect('node_map', node_list)
+        #print("befor ret")
+        Network.mapper(node_list)
+        return redirect('/')
     else:
         form = create_node(request.form)
     return render_template('can-bus-manager.html', title='CAN Bus Manager',form = form)
