@@ -3,6 +3,7 @@ from wtforms import StringField, TextAreaField, SelectField, SubmitField
 from wtforms.validators import DataRequired
 from wtforms.csrf.core import CSRF
 from hashlib import md5
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 SECRET_KEY = '72109ede3972aab8'
 class IPAddressCSRF(CSRF):
     """
@@ -31,6 +32,7 @@ class create_project_form(baseSecureForm):
     can_connector_id = StringField("CAN Connector ID", validators=[DataRequired()])
     vehicle_id = StringField("Vehicle ID", validators=[DataRequired()])
     baud_rate = StringField("Baud Rate", validators=[DataRequired()])
-    can_dbc= StringField("CAN DBC", validators=[DataRequired()])
+    #can_dbc= StringField("CAN DBC", validators=[DataRequired()])
+    can_dbc = FileField("CAN DBC", validators=[FileRequired(), FileAllowed(['dbc'], 'DBC File Required')])
     validators = [DataRequired()]
     submit = SubmitField("Submit")
