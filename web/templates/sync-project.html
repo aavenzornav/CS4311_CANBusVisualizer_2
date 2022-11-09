@@ -1,9 +1,32 @@
 {% extends 'layouts.html' %}
 
 {% block content %}
-<h1>Sync Project</h1>
+<div class="row">
+    <h1>Synchronize Project</h1>
+    <div class="col m-auto">
+        <div class="card" style="background: #666666">
+            <h5 class="card-header" style="color: black; background: #C4C4C4">Available Devices to Share</h5>
+            <div class="container mx-0 px-0 my-1">
+                <h2></h2><br>
+                    <div class="devicesAvailable">
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col m-auto">
+        <div class="card" style="background: #666666">
+            <h5 class="card-header" style="color: black; background: #C4C4C4">Available Files to Share </h5>
+            <div class="container">
+                <div class="New Project">
+                    <div class="container mx-0 px-0 my-1">
+                        <h2></h2><br>
+                        <div class="filesToShare">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-<script src="{{url_for('static', filename='main.js')}}"></script>
 
 {% endblock content %}
