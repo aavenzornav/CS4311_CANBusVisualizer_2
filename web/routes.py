@@ -73,6 +73,10 @@ def archive_project():
 def can_bus_manager():
     return render_template('can-bus-manager.html', title='CAN Bus Manager')
 
+@app.route('/view-traffic')
+
+def view_traffic():
+    return render_template('view-traffic.html', title='View Traffic')
 
 
 
