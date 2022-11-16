@@ -29,8 +29,8 @@ def node_map1():
     return render_template('node-map1.html', title='Open Existing Project', todos=todos)
 
 #create project will be stored in mongo db
-@app.route('/manage-project', methods = ("POST", "GET"))
-def manage_project():
+@app.route('/create-project', methods = ("POST", "GET"))
+def create_project():
    
     if request.method == "POST":
         form = create_project_form(request.form)
@@ -55,7 +55,7 @@ def manage_project():
     else:
         form = create_project_form()
     #print(db.project.find_one())
-    return render_template('manage-project.html', title='Create Project', form=form)
+    return render_template('create-project.html', title='Create Project', form=form)
 
 
 @app.route('/sync-project')
