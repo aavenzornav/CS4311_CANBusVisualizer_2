@@ -3,12 +3,19 @@ import json
 
 
 #testing to make the mapping of nodes without using data
-def map():
+def mapper(node_list):
+    print("test")
     net = Network(height = "1500px", width = "100%", bgcolor = "#222222", font_color="white")
-    net.add_node(1, label = "Node 1")
-    net.add_node(2)
-    net.add_edge(1,2)
+    prev = 0
+    for i in range(len(node_list)):
+        print(i)
+        net.add_node(i, label = node_list[i])
+        if(i==0):
+            continue
+        else:
+            net.add_edge(prev,i)
+            prev+=1
     net.show("nodes.html") #creates a new file from "nodes.html"
-    #display(HTML("nodes.html"))
+        #display(HTML("nodes.html"))
 
-map()
+#map()
