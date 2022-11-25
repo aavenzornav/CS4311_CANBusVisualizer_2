@@ -2,97 +2,172 @@
 
 {% block content %}
 
-    <div>
-        <h2>Create New Project</h2><br>
-            <div class="New Project">
-                <form action = "" method = "POST">
-                    {{ form.csrf_token}}
-                    <fieldset class = "form-group">
-                        <legend> Enter Project Details</legend>
-                        <div class = "form-group">
-                            {{form.user_initials.label(class = "form-control-label")}}
-                            {% if form.user_initials.errors %}
-                                {{form.user_initials(class = "form.control is-invalid")}}
-                                {%for error in form.user_initials.errors %}
-                                    <div class = "invalid-feedback">
-                                        <span>{{error}}</span>
+    <div class="row">
+        <div class="col my-5">
+            <div class="card text-center" style="background: #666666">
+                <h5 class="card-header text-center" style="color: black; background: #C4C4C4">Open Project</h5>
+                <div class="container m-auto">
+                    <div class="btn-group">
+                  <button type="button" class="btn mt-4 btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    --Select Project--
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Project Shadow</a>
+                    <a class="dropdown-item" href="#">Project Arceus</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                  </div>
+                </div>
+                    <div class="container">
+                        <form action = "" method = "POST">
+                            {{ form.csrf_token}}
+                            <fieldset class = "form-group text-center my-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class = "form-group my-3" style="width: 100%">
+                                            <button type="button" class="btn btn-secondary btn-lg">icon</button>
+                                        </div>
+                                        <div class = "form-group my-3">
+                                           <button type="button" class="btn btn-secondary btn-lg">icon</button>
+                                        </div>
+                                        <div class = "form-group my-3">
+                                           <button type="button" class="btn btn-secondary btn-lg">icon</button>
+                                        </div>
+                                        <div class = "form-group my-4">
+                                           <button type="button" class="btn btn-secondary btn-lg">icon</button>
+                                        </div>
+                                        <div class = "form-group mt-5">
+                                           <button type="button" class="btn btn-secondary btn-lg">icon</button>
+                                        </div>
                                     </div>
-                                {% endfor %}
-                            {% else %}
-                                {{form.user_initials(class="form-control")}}
-                            {% endif %}
-                        </div>
-                        <div class = "form-group">
-                            {{form.event_name.label(class = "form-control-label")}}
-                            {% if form.event_name.errors %}
-                                {{form.event_name(class = "form.control is-invalid")}}
-                                {%for error in form.event_name.errors %}
-                                    <div class = "invalid-feedback">
-                                        <span>{{error}}</span>
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                {{form.event_name(class="form-control")}}
-                            {% endif %}
-                        </div>
-                        <div class = "form-group">
-                            {{form.can_connector_id.label(class = "form-control-label")}}
-                            {% if form.can_connector_id.errors %}
-                                {{form.can_connector_id(class = "form.control is-invalid")}}
-                                {%for error in form.can_connector_id.errors %}
-                                    <div class = "invalid-feedback">
-                                        <span>{{error}}</span>
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                {{form.can_connector_id(class="form-control")}}
-                            {% endif %}
-                        </div>
-                        <div class = "form-group">
-                            {{form.vehicle_id.label(class = "form-control-label")}}
-                            {% if form.vehicle_id.errors %}
-                                {{form.vehicle_id(class = "form.control is-invalid")}}
-                                {%for error in form.vehicle_id.errors %}
-                                    <div class = "invalid-feedback">
-                                        <span>{{error}}</span>
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                {{form.vehicle_id(class="form-control")}}
-                            {% endif %}
-                        </div>
-                        <div class = "form-group">
-                            {{form.baud_rate.label(class = "form-control-label")}}
-                            {% if form.baud_rate.errors %}
-                                {{form.baud_rate(class = "form.control is-invalid")}}
-                                {%for error in form.baud_rate.errors %}
-                                    <div class = "invalid-feedback">
-                                        <span>{{error}}</span>
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                {{form.baud_rate(class="form-control")}}
-                            {% endif %}
-                        </div>
-                        <div class = "form-group">
-                            {{form.can_dbc.label(class = "form-control-label")}}
-                            {% if form.can_dbc.errors %}
-                                {{form.can_dbc(class = "form.control is-invalid")}}
-                                {%for error in form.can_dbc.errors %}
-                                    <div class = "invalid-feedback">
-                                        <span>{{error}}</span>
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                {{form.can_dbc(class="form-control")}}
-                            {% endif %}
-                        </div>
-                        <div class = "form-group">
-                            {{form.submit(class="btn btn-outline-info")}}
-                        </div>
-                    </fieldset>
-                </form>
+                                    <div class="col">
+                                        <div class = "form-group my-3" style="width: 100%">
+                                            <button type="button" class="btn btn-secondary btn-lg col-12">Project List</button>
+                                        </div>
+                                        <div class = "form-group my-3">
+                                           <button type="button" class="btn btn-secondary btn-lg col-12">View Traffic</button>
+                                        </div>
+                                        <div class = "form-group my-3">
+                                           <button type="button" class="btn btn-secondary btn-lg col-12">Generate Map</button>
+                                        </div>
+                                        <div class = "form-group my-3">
+                                           <button type="button" class="btn btn-secondary btn-lg col-12">Tag Nodes(add metadata)</button>
+                                        </div>
+                                        <div class = "form-group my-3">
+                                           <button type="button" class="btn btn-secondary btn-lg col-12">Update Project Configuration</button>
+                                        </div>                                    </div>
+                                </div>
+
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
-    </div>
+        </div>
+        <div class="col my-5">
+            <div class="card" style="background: #666666; height: 100%" >
+                <h5 class="card-header text-center" style="color: black; background: #C4C4C4; ali">Create New Project</h5>
+                <div class="container">
+                    <div class="New Project">
+                        <div class="container mx-0 px-0 my-1">
+                            <form action = "" method = "POST">
+                                {{ form.csrf_token}}
+                                <fieldset class = "form-group">
+                                    <div class = "form-group">
+                                        {{form.user_initials.label(class = "form-control-label")}}
+                                        {% if form.user_initials.errors %}
+                                            {{form.user_initials(class = "form.control is-invalid")}}
+                                            {%for error in form.user_initials.errors %}
+                                                <div class = "invalid-feedback">
+                                                    <span>{{error}}</span>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            {{form.user_initials(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class = "form-group">
+                                        {{form.event_name.label(class = "form-control-label")}}
+                                        {% if form.event_name.errors %}
+                                            {{form.event_name(class = "form.control is-invalid")}}
+                                            {%for error in form.event_name.errors %}
+                                                <div class = "invalid-feedback">
+                                                    <span>{{error}}</span>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            {{form.event_name(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class = "form-group">
+                                        {{form.can_connector_id.label(class = "form-control-label")}}
+                                        {% if form.can_connector_id.errors %}
+                                            {{form.can_connector_id(class = "form.control is-invalid")}}
+                                            {%for error in form.can_connector_id.errors %}
+                                                <div class = "invalid-feedback">
+                                                    <span>{{error}}</span>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            {{form.can_connector_id(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class = "form-group">
+                                        {{form.vehicle_id.label(class = "form-control-label")}}
+                                        {% if form.vehicle_id.errors %}
+                                            {{form.vehicle_id(class = "form.control is-invalid")}}
+                                            {%for error in form.vehicle_id.errors %}
+                                                <div class = "invalid-feedback">
+                                                    <span>{{error}}</span>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            {{form.vehicle_id(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class = "form-group">
+                                        {{form.baud_rate.label(class = "form-control-label")}}
+                                        {% if form.baud_rate.errors %}
+                                            {{form.baud_rate(class = "form.control is-invalid")}}
+                                            {%for error in form.baud_rate.errors %}
+                                                <div class = "invalid-feedback">
+                                                    <span>{{error}}</span>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            {{form.baud_rate(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class = "form-group">
+                                        {{form.can_dbc.label(class = "form-control-label")}}
+                                        {% if form.can_dbc.errors %}
+                                            {{form.can_dbc(class = "form.control is-invalid")}}
+                                            {%for error in form.can_dbc.errors %}
+                                                <div class = "invalid-feedback">
+                                                    <span>{{error}}</span>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            {{form.can_dbc(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <style>
+                                        btn{
+                                            color: #FDD534;
+                                        }
+                                    </style>
+                                    <div class = "form-group my-3">
+                                        {{form.submit(class="btn btn-warning")}}
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 {% endblock content %}

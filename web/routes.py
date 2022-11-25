@@ -89,6 +89,10 @@ def can_bus_manager():
         form = create_node(request.form)
     return render_template('can-bus-manager.html', title='CAN Bus Manager',form = form)
 
+@app.route('/view-traffic')
+
+def view_traffic():
+    return render_template('view-traffic.html', title='View Traffic')
 
 
 
