@@ -38,4 +38,4 @@ class create_project_form(baseSecureForm):
 class create_node(baseSecureForm):
     node_name = StringField("Node Name", validators=[DataRequired()])
     validators = [DataRequired()]
-    submit = SubmitField("Submit")
+    submit = SubmitField("Create Node")
