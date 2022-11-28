@@ -4,8 +4,10 @@ from . import db
 from .forms import create_project_form, create_node
 from datetime import datetime
 from werkzeug.utils import redirect
-from web import Network
+#from web import Network
+from pyvis.network import Network
 
+net = Network(height="1500px", width="100%", bgcolor="#222222", font_color="white")
 
 node_list = []
 @app.route('/')
@@ -83,8 +85,24 @@ def can_bus_manager():
         todo_node_name = form.node_name.data
         node_list.append(todo_node_name)
         #print("befor ret")
-        Network.mapper(node_list)
-        return redirect('/')
+        #Network.mapper(node_list)
+        print("test")
+        #net = Network(height="1500px", width="100%", bgcolor="#222222", font_color="white")
+        prev = 0
+        net.show_buttons()
+        #net.show_buttons(filter_=["edges"])
+        for i in range(len(node_list)):
+            print(i)
+            net.add_node(i, label=node_list[i])
+            if (i == 0):
+                continue
+            else:
+                net.add_edge(prev, i)
+                prev += 1
+
+        net.show("web/templates/nodes.html")  # creates a new file from "nodes.html"
+        # display(HTML("nodes.html"))
+        return redirect('can-bus-manager')
     else:
         form = create_node(request.form)
     return render_template('can-bus-manager.html', title='CAN Bus Manager',form = form)
