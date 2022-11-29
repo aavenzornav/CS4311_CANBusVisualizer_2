@@ -63,7 +63,7 @@ def manage_project():
 @app.route('/sync-project')
 
 def sync_project():
-    return render_template('sync-project.html', title='Sync Project')
+    return render_template('sync-project.html', title='Sync Project', srcPath='/web/lib/projects')
 
 @app.route('/archive-project')
 
