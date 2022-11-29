@@ -107,7 +107,7 @@ def can_bus_manager():
         #appending only the user initials for the moment
         #node_list.append(project_info[0])
 
-        file = "/home/alexisn/Desktop/CS4311_CANBusVisualizer_2/web/templates/node_info.json"
+        file = "web/static/jsonnodes/node_info.json"
         with open(file, "r") as f:
             data = json.load(f)
         print(data)
