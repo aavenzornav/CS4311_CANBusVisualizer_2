@@ -6,11 +6,17 @@ from datetime import datetime
 from werkzeug.utils import redirect
 #from web import Network
 from pyvis.network import Network
+import json
 
+#global to create the size if the node mapping square
 net = Network(height="1500px", width="100%", bgcolor="#222222", font_color="white")
 
+#list to hold the nodes
 node_list = []
+
+#list to hold the information of a project from the database
 project_info =[]
+
 @app.route('/')
 def homepage():
     return render_template('base.html', title='Home')
@@ -79,7 +85,7 @@ def node_map():
 @app.route('/can-bus-manager', methods = ("POST", "GET"))
 def can_bus_manager():
     if request.method == "POST":
-        #to obtain the database information
+        #to obtain the database information and store them into a list
         info = db.project.find_one({"user_initials": "admin"})
         user = info["user_initials"]
         event = info["event_name"]
@@ -93,41 +99,52 @@ def can_bus_manager():
         project_info.append(vehicle_id)
         project_info.append(baud_rate)
 
+        #infomation that will be posted to create a node with a specific name
         form = create_node(request.form)
         todo_node_name = form.node_name.data
+        todo_add_node_to = form.connector.data
+
+        #appending only the user initials for the moment
+        #node_list.append(project_info[0])
+
+        file = "/home/alexisn/Desktop/CS4311_CANBusVisualizer_2/web/templates/node_info.json"
+        with open(file, "r") as f:
+            data = json.load(f)
+        print(data)
+
+        #appending the name of the node inputted by the user
         node_list.append(todo_node_name)
-        #user = "admin"
-        #proj = [] #todos
+        #net.add_node((todo_node_name))
 
-        i=0
-        todos = []
-        # todo = db.project.find_one({"event_name": "Proj1"})
-
-        #for todo in db.project.find({"user_initials": "admin"}):
-
-            #print(todo)
-            #todos.append(todo)
-            #print("un",todos)
-
-
-        #print("befor ret")
-        #Network.mapper(node_list)
-        print("test")
-        #net = Network(height="1500px", width="100%", bgcolor="#222222", font_color="white")
         prev = 0
+        i=0
         net.show_buttons()
-        #net.show_buttons(filter_=["edges"])
-        for i in range(len(node_list)):
-            print(i)
-            net.add_node(i, label=node_list[i])
-            if (i == 0):
-                continue
-            else:
-                net.add_edge(prev, i)
-                prev += 1
 
+        for import_node in data:
+            name = (import_node["name"])
+            #id_num = (thing["id"])
+            net.add_node(name)
+            # for loop is to add a node inside the node map
+            for item in node_list:
+                net.add_node(item)
+                #to check which node we will connect to, optional
+                if todo_add_node_to == name:
+                    net.add_edge(name, todo_node_name)
+                if todo_add_node_to == node_list[i]:
+                    net.add_edge(todo_add_node_to, item)
+            '''            for i in range(len(node_list)):
+                print(node_list)
+                net.add_node(i, label=node_list[i])
+                if todo_add_node_to == name:
+                    net.add_edge(name, i)
+                elif todo_add_node_to == node_list:
+                    net.add_edge(todo_node_name, todo_add_node_to)
+'''
+
+                    #net.add_edge(name, i)
+
+                #prev += 1
         net.show("web/templates/nodes.html")  # creates a new file from "nodes.html"
-        # display(HTML("nodes.html"))
         return redirect('can-bus-manager')
     else:
         form = create_node(request.form)
