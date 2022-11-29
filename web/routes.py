@@ -10,6 +10,7 @@ from pyvis.network import Network
 net = Network(height="1500px", width="100%", bgcolor="#222222", font_color="white")
 
 node_list = []
+project_info =[]
 @app.route('/')
 def homepage():
     return render_template('base.html', title='Home')
@@ -28,7 +29,6 @@ def open_project():
 def node_map1():
     todos = []
     todo = db.project.find_one({"event_name":  "Proj1"})
-    # info = db.project.find()
     todos.append(todo)
     return render_template('node-map1.html', title='Open Existing Project', todos=todos)
 
@@ -54,11 +54,9 @@ def manage_project():
             "baud_rate": todo_baud_rate,
             "can_dbc": todo_can_dbc
         })
-        flash("user initials", "event name")
         return redirect('/')
     else:
         form = create_project_form(request.form)
-    #print(db.project.find_one())
     return render_template('manage-project.html', title='Create Project', form=form)
 
 
@@ -81,9 +79,37 @@ def node_map():
 @app.route('/can-bus-manager', methods = ("POST", "GET"))
 def can_bus_manager():
     if request.method == "POST":
+        #to obtain the database information
+        info = db.project.find_one({"user_initials": "admin"})
+        user = info["user_initials"]
+        event = info["event_name"]
+        can_id = info["can_connector_id"]
+        vehicle_id = info["vehicle id"]
+        baud_rate = info["baud_rate"]
+
+        project_info.append(user)
+        project_info.append(event)
+        project_info.append(can_id)
+        project_info.append(vehicle_id)
+        project_info.append(baud_rate)
+
         form = create_node(request.form)
         todo_node_name = form.node_name.data
         node_list.append(todo_node_name)
+        #user = "admin"
+        #proj = [] #todos
+
+        i=0
+        todos = []
+        # todo = db.project.find_one({"event_name": "Proj1"})
+
+        #for todo in db.project.find({"user_initials": "admin"}):
+
+            #print(todo)
+            #todos.append(todo)
+            #print("un",todos)
+
+
         #print("befor ret")
         #Network.mapper(node_list)
         print("test")
