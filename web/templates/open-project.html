@@ -1,14 +1,14 @@
 {% extends 'layouts.html' %}
 
 {% block content %}
-    {% for todo in todos %}
+    {% for record in projRecord %}
         <div class = "card p-1 m-3">
             <div class = card-body">
 
-                <h5 class = "card title"><del>{{ todo.user_initials }}</del></h5>
+                <h5 class = "card title"><del>{{ record.user_initials }}</del></h5>
 
-            <p class = card-text">{{todo.event_name}}</p>
-            <p class = card-text">{{todo.can_connector_id}}</p>
+            <p class = card-text">{{record.event_name}}</p>
+            <p class = card-text">{{record.can_connector_id}}</p>
             </div>
         </div>
     {%endfor%}

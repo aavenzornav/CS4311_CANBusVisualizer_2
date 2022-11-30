@@ -8,3 +8,4 @@ Flask-WTF==1.0.1
 dnspython==2.2.1
 werkzeug==2.2.2
 pyvis==0.3.0
+networkx==2.8.8

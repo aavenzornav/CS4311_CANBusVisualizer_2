@@ -5,11 +5,14 @@ from .forms import create_project_form, create_node
 from datetime import datetime
 from werkzeug.utils import redirect
 #from web import Network
+import networkx as nx
 from pyvis.network import Network
 import json
 
 #global to create the size if the node mapping square
-net = Network(height="1500px", width="100%", bgcolor="#222222", font_color="white")
+#creating networkx for rendering through pyvis
+netGraph = nx.Graph()
+net = Network(height="1000px", width="1000px", bgcolor="#222222", font_color="white", select_menu=True, filter_menu=True)
 
 #list to hold the nodes
 node_list = []
@@ -25,12 +28,12 @@ def homepage():
 def open_project():
     #same as node-map1 method;
     #this will make it possible to retrieve ALL the collections in the project db
-    todos = []
-    for todo in db.project.find().sort("user_initials", -1):
-        todo["_id"] = str(todo["_id"])
-        todos.append(todo)
+    projRecord = []
+    for record in db.project.find().sort("user_initials", -1):
+        projRecord["_id"] = str(projRecord["_id"])
+        projRecord.append(record)
     #info = db.project.find()
-    return render_template('open-project.html', title='Open Existing Project', todos = todos)
+    return render_template('open-project.html', title='Open Existing Project', todos=projRecord)
 @app.route('/node-map1')
 def node_map1():
     todos = []
@@ -44,21 +47,21 @@ def manage_project():
    
     if request.method == "POST":
         form = create_project_form(request.form)
-        todo_user_initials = form.user_initials.data
-        todo_event_name = form.event_name.data
-        todo_can_connector_id = form.can_connector_id.data
-        todo_vehicle_id = form.vehicle_id.data
-        todo_baud_rate = form.baud_rate.data
-        todo_can_dbc = form.can_dbc.data
+        user_initials = form.user_initials.data
+        event_name = form.event_name.data
+        can_connector_id = form.can_connector_id.data
+        vehicle_id = form.vehicle_id.data
+        baud_rate = form.baud_rate.data
+        can_dbc = form.can_dbc.data
 
 
         db.project.insert_one({
-            "user_initials": todo_user_initials,
-            "event_name": todo_event_name,
-            "can_connector_id": todo_can_connector_id,
-            "vehicle id": todo_vehicle_id,
-            "baud_rate": todo_baud_rate,
-            "can_dbc": todo_can_dbc
+            "user_initials": user_initials,
+            "event_name": event_name,
+            "can_connector_id": can_connector_id,
+            "vehicle id": vehicle_id,
+            "baud_rate": baud_rate,
+            "can_dbc": can_dbc
         })
         return redirect('/')
     else:
@@ -101,8 +104,8 @@ def can_bus_manager():
 
         #infomation that will be posted to create a node with a specific name
         form = create_node(request.form)
-        todo_node_name = form.node_name.data
-        todo_add_node_to = form.connector.data
+        node_name = form.node_name.data
+        add_node_to = form.connector.data
 
         #appending only the user initials for the moment
         #node_list.append(project_info[0])
@@ -113,25 +116,24 @@ def can_bus_manager():
         print(data)
 
         #appending the name of the node inputted by the user
-        node_list.append(todo_node_name)
+        node_list.append(node_name)
         #net.add_node((todo_node_name))
 
         prev = 0
         i=0
-        net.show_buttons()
 
         for import_node in data:
             name = (import_node["name"])
             #id_num = (thing["id"])
-            net.add_node(name)
+            netGraph.add_node(name)
             # for loop is to add a node inside the node map
             for item in node_list:
-                net.add_node(item)
+                netGraph.add_node(item)
                 #to check which node we will connect to, optional
-                if todo_add_node_to == name:
-                    net.add_edge(name, todo_node_name)
-                if todo_add_node_to == node_list[i]:
-                    net.add_edge(todo_add_node_to, item)
+                if add_node_to == name:
+                    netGraph.add_edge(name, node_name)
+                if add_node_to == node_list[i]:
+                    netGraph.add_edge(add_node_to, item)
             '''            for i in range(len(node_list)):
                 print(node_list)
                 net.add_node(i, label=node_list[i])
@@ -144,6 +146,8 @@ def can_bus_manager():
                     #net.add_edge(name, i)
 
                 #prev += 1
+        net.from_nx(netGraph)
+        #net.show_buttons()
         net.show("web/templates/nodes.html")  # creates a new file from "nodes.html"
         return redirect('can-bus-manager')
     else:
