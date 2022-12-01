@@ -69,7 +69,7 @@ def sync_project():
     if request.method == "GET":
         print("hello")
         form = sync_form(request.form)
-        argstwo = ["rsync" , 'web/src/hello1.dbc' , 'web/dest/hello.dbc']
+        argstwo = ["rsync" , 'web/src/j1939_1.dbc' , 'web/dest/hello.dbc']
         subprocess.call(argstwo);
         return render_template('sync-project.html', title='Sync Project', srcPath='/web/lib/projects', form=form)
 
