@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, flash
-from web import app 
+from web import app
+import os
+import subprocess
 from . import db
-from .forms import create_project_form, create_node
+from .forms import create_project_form, create_node, sync_form
 from datetime import datetime
 from werkzeug.utils import redirect
 from web import Network
@@ -60,10 +62,20 @@ def manage_project():
     return render_template('manage-project.html', title='Create Project', form=form)
 
 
-@app.route('/sync-project')
-
+@app.route('/sync-project', methods = ("POST", "GET"))
 def sync_project():
-    return render_template('sync-project.html', title='Sync Project', srcPath='/web/lib/projects')
+
+
+    if request.method == "GET":
+        print("hello")
+        form = sync_form(request.form)
+        argstwo = ["rsync" , 'web/src/hello1.dbc' , 'web/dest/hello.dbc']
+        subprocess.call(argstwo);
+        return render_template('sync-project.html', title='Sync Project', srcPath='/web/lib/projects', form=form)
+
+    else:
+        form = sync_form(request.form)
+        return render_template('sync-project.html', title='Sync Project', srcPath='/web/lib/projects', form=form)
 
 @app.route('/archive-project')
 
