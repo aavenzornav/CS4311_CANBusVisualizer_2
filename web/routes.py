@@ -77,12 +77,6 @@ def sync_project():
         form = sync_form(request.form)
         return render_template('sync-project.html', title='Sync Project', srcPath='/web/lib/projects', form=form)
 
-
-@app.route('/archive-project')
-
-def archive_project():
-    return render_template('archive-project.html', title='Archive Project')
-
 @app.route("/node_map", methods = ("POST", "GET"))
 def node_map():
     print("enter")
