@@ -12,7 +12,7 @@ import json
 #global to create the size if the node mapping square
 #creating networkx for rendering through pyvis
 netGraph = nx.Graph()
-net = Network(height="1000px", width="1000px", bgcolor="#222222", font_color="white", select_menu=True, filter_menu=True)
+net = Network(height="1000px", width="1000px", bgcolor="#222222", font_color="white")
 
 #list to hold the nodes
 node_list = []
