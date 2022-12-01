@@ -2,9 +2,9 @@
 
 {% block content %}
     {% for todo in todos %}
-        <div class = "card p-1 m-3">
+        <div class = "card p-1 m-3" style = "background: #666666">
             <div class = card-body">
-                <h5 class = "card title">{{ todo.user_initials }}</h5>
+                <h5 class = "card title"style="color: black; background: #C4C4C4">{{ todo.user_initials }}</h5>
 
             <p class = card-text">{{todo.event_name}}</p>
             <p class = card-text">{{todo.can_connector_id}}</p>
