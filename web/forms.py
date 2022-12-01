@@ -45,5 +45,6 @@ class create_node(baseSecureForm):
 
 class create_node(baseSecureForm):
     node_name = StringField("Node Name", validators=[DataRequired()])
+    connector = StringField("connect new node to?")
     validators = [DataRequired()]
-    submit = SubmitField("Submit")
+    submit = SubmitField("Create Node")

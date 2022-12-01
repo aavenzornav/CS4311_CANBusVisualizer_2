@@ -15,7 +15,7 @@ def mapper(node_list):
         else:
             net.add_edge(prev,i)
             prev+=1
-    net.show("nodes.html") #creates a new file from "nodes.html"
+    net.show("web/templates/nodes.html") #creates a new file from "nodes.html"
         #display(HTML("nodes.html"))
 
 #map()
