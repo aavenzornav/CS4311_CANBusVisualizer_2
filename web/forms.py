@@ -35,6 +35,9 @@ class create_project_form(baseSecureForm):
     validators = [DataRequired()]
     submit = SubmitField("Submit")
 
+class sync_form(baseSecureForm):
+    submit = SubmitField("Submit")
+
 class create_node(baseSecureForm):
     node_name = StringField("Node Name", validators=[DataRequired()])
     validators = [DataRequired()]
