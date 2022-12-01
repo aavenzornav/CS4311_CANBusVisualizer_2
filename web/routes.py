@@ -20,13 +20,13 @@ def open_project():
         todos.append(todo)
     #info = db.project.find()
     return render_template('open-project.html', title='Open Existing Project', todos = todos)
-@app.route('/node-map1')
+@app.route('/project1')
 def node_map1():
     todos = []
     todo = db.project.find_one({"event_name":  "Proj1"})
     # info = db.project.find()
     todos.append(todo)
-    return render_template('node-map1.html', title='Open Existing Project', todos=todos)
+    return render_template('project1.html', title='Open Existing Project', todos=todos)
 
 #create project will be stored in mongo db
 @app.route('/manage-project', methods = ("POST", "GET"))
@@ -62,11 +62,6 @@ def manage_project():
 
 def sync_project():
     return render_template('sync-project.html', title='Sync Project')
-
-@app.route('/archive-project')
-
-def archive_project():
-    return render_template('archive-project.html', title='Archive Project')
 
 @app.route('/can-bus-manager')
 
