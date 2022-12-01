@@ -1,0 +1,44 @@
+    {% extends 'layouts.html' %}
+
+    {% block content %}
+    <h1>Tag Nodes </h1>
+
+
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+    <div class="container">
+    <div class = "card" style="background: #666666">
+
+        <div class="container p-2">
+
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Node ID:</label>
+                <input type="Node ID" class="form-control" id="exampleInputEmail11" aria-describedby="emailHelp" placeholder={{nID}}>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Blacklist Status:</label>
+                <input type="Blacklist status" class="form-control" id="exampleInputPassword1">
+              </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Node Name:</label>
+                <input type="Node name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Node Status:</label>
+                <input type="Node status:" class="form-control" id="exampleInputPassword11"  placeholder="{{blStatus}}" >
+              </div>
+
+                <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Notes:</label>
+                <input type="Notes" class="form-control" id="exampleInputPassword111">
+              </div>
+
+              <button type="submit" class="btn btn-warning">Save</button>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+{% endblock content %}

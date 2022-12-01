@@ -77,6 +77,7 @@ def sync_project():
         form = sync_form(request.form)
         return render_template('sync-project.html', title='Sync Project', srcPath='/web/lib/projects', form=form)
 
+
 @app.route('/archive-project')
 
 def archive_project():
@@ -106,6 +107,10 @@ def can_bus_manager():
 def view_traffic():
     return render_template('view-traffic.html', title='View Traffic')
 
+@app.route('/tags')
+
+def tag_nodes():
+    return render_template('tag_nodes.html', title='Sync Project', nID='0x7E5', blStatus = 'False')
 
 
 
